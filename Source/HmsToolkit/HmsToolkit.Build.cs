@@ -8,6 +8,7 @@
 
 
 using UnrealBuildTool;
+using System.IO;
 
 public class HmsToolkit : ModuleRules
 {
