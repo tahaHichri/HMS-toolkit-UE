@@ -1,0 +1,27 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "HMS Toolkit",
+  "Description": "Huawei Mobile Services toolkit for Unreal Engine.",
+  "Category": "Mobile",
+  "CreatedBy": "Taha Hichri",
+  "CreatedByURL": "",
+  "EngineVersion": "4.20.0",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "Installed": true,
+  "Modules": [
+    {
+      "Name": "HmsToolkit",
+      "Type": "Runtime",
+      "LoadingPhase": "PostConfigInit", // PreLoadingScreen
+      "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "IOS", "Android" ]
+    }
+  ],
+  "EnabledByDefault": true
+}
