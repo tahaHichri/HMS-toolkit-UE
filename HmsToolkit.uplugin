@@ -7,7 +7,7 @@
   "Category": "Mobile",
   "CreatedBy": "Taha Hichri",
   "CreatedByURL": "",
-  "EngineVersion": "4.20.0",
+  "EngineVersion": "4.25.0",
   "DocsURL": "",
   "MarketplaceURL": "",
   "SupportURL": "",
@@ -19,7 +19,7 @@
     {
       "Name": "HmsToolkit",
       "Type": "Runtime",
-      "LoadingPhase": "PostConfigInit", // PreLoadingScreen
+      "LoadingPhase": "PreDefault",
       "WhitelistPlatforms": [ "Win64", "Win32", "Mac", "IOS", "Android" ]
     }
   ],
