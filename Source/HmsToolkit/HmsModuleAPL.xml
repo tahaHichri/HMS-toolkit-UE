@@ -85,27 +85,29 @@ allprojects {
       
       import java.util.Collections;
       import java.util.ArrayList;
-import java.util.List;
+      import java.util.List;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
+      import android.content.Intent;
+      import android.os.Bundle;
+      import android.util.Log;
 
-<!-- import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate; -->
+      
+      <!-- import androidx.appcompat.app.AppCompatActivity;
+      import androidx.appcompat.app.AppCompatDelegate;  -->
+     
 
-import com.huawei.cloud.base.auth.DriveCredential;
-import com.huawei.cloud.services.drive.DriveScopes;
-import com.huawei.hmf.tasks.Task;
-import com.huawei.hms.common.ApiException;
-import com.huawei.hms.support.api.entity.auth.Scope;
-import com.huawei.hms.support.hwid.HuaweiIdAuthAPIManager;
-import com.huawei.hms.support.hwid.HuaweiIdAuthManager;
-import com.huawei.hms.support.hwid.request.HuaweiIdAuthParams;
-import com.huawei.hms.support.hwid.request.HuaweiIdAuthParamsHelper;
-import com.huawei.hms.support.hwid.result.AuthHuaweiId;
-import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
-<!-- import static com.huawei.hms.support.hwid.request.HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM; -->
+      import com.huawei.cloud.base.auth.DriveCredential;
+      import com.huawei.cloud.services.drive.DriveScopes;
+      import com.huawei.hmf.tasks.Task;
+      import com.huawei.hms.common.ApiException;
+      import com.huawei.hms.support.api.entity.auth.Scope;
+      import com.huawei.hms.support.hwid.HuaweiIdAuthAPIManager;
+      import com.huawei.hms.support.hwid.HuaweiIdAuthManager;
+      import com.huawei.hms.support.hwid.request.HuaweiIdAuthParams;
+      import com.huawei.hms.support.hwid.request.HuaweiIdAuthParamsHelper;
+      import com.huawei.hms.support.hwid.result.AuthHuaweiId;
+      import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
+      import static com.huawei.hms.support.hwid.request.HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM;
 
     </insert>
   </gameActivityImportAdditions>
@@ -125,7 +127,7 @@ import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
   -->
 	<gameActivityOnCreateAdditions>
      <insert>
-       <!-- huaweiLogin(); -->
+       huaweiLogin();
      </insert>
   </gameActivityOnCreateAdditions>
   
@@ -166,12 +168,16 @@ import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
     --> 
   <gameActivityClassAdditions>
     <insert>
+
+    private static int REQUEST_SIGN_IN_LOGIN = 1302;
       
-     <!-- private final static String HmsTAG = &quot;HMS:: &quot;;
-       private static int REQUEST_SIGN_IN_LOGIN = 1302;
-     
-       private String accessToken;
-       private String unionId;  
+    private final static String HmsTAG = &quot;HMS:: &quot;;
+
+    private String accessToken;
+    private String unionId;  
+
+         <!--
+
        
      
     /**
@@ -200,9 +206,9 @@ import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
     }
     
     
-  
+  -->
   private void huaweiLogin() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        <!-- AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); -->
         List&lt;Scope&gt; scopeList = new ArrayList&lt;&gt;();
         scopeList.add(HuaweiIdAuthAPIManager.HUAWEIID_BASE_SCOPE);
 
@@ -213,10 +219,30 @@ import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
                 .createParams();
         HuaweiIdAuthService client = HuaweiIdAuthManager.getService(this, authParams);
         startActivityForResult(client.getSignInIntent(), REQUEST_SIGN_IN_LOGIN);
-    } -->
+    } 
 
     </insert>
   </gameActivityClassAdditions>
+
+
+    <gameActivityOnActivityResultAdditions>  
+    <insert>
+     <!-- Log.i(HmsTAG, "onActivityResult, requestCode = " + requestCode + ", resultCode = " + resultCode); -->
+          if (requestCode == REQUEST_SIGN_IN_LOGIN) {
+            Task&lt;AuthHuaweiId&gt; authHuaweiIdTask = HuaweiIdAuthManager.parseAuthResultFromIntent(data);
+            if (authHuaweiIdTask.isSuccessful()) {
+                AuthHuaweiId huaweiAccount = authHuaweiIdTask.getResult();
+                accessToken = huaweiAccount.getAccessToken();
+                unionId = huaweiAccount.getUnionId();
+                //int returnCode = init(unionId, accessToken, refreshAT);
+
+            } else {
+                <!-- Log.d(HmsTAG, &quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode()); -->
+              //  Toast.makeText(getApplicationContext(), &quot;onActivityResult, signIn failed.&quot;, Toast.LENGTH_LONG).show();
+            }
+        }
+    </insert>
+      </gameActivityOnActivityResultAdditions>
 
 
 
