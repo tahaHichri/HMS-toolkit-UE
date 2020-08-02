@@ -33,26 +33,28 @@ allprojects {
 
   <buildscriptGradleAdditions>
  <insert>
-    repositories {
 
+    repositories {
       // Huawei repository
       maven { url 'https://developer.huawei.com/repo/' }
-
     }
 
 
     dependencies {
-    
       // Huawei AG connect
       classpath 'com.huawei.agconnect:agcp:1.2.1.301'
-    
+
+      // analytics
+      classpath 'com.huawei.hms.plugin:analytics:5.0.1.300'
     }
-
-
     </insert>
 
   </buildscriptGradleAdditions>
 
+
+<prebuildCopies>
+<copyFile src="$S(PluginDir)/agconnect-services.json" dst="$S(BuildDir)/gradle/app/agconnect-services.json"/>
+</prebuildCopies>
 
   <buildGradleAdditions>
 
@@ -63,11 +65,13 @@ allprojects {
     /**
     * HMS dependencies
     */
-    implementation 'com.huawei.hms:drive:4.0.0.301'         // driveKit
+
     implementation 'com.huawei.hms:hwid:4.0.0.300'          // Core
+    implementation 'com.huawei.hms:hianalytics:5.0.1.301'   // analytics
     }
 
     apply plugin: 'com.huawei.agconnect'
+    apply plugin: 'com.huawei.hms.plugin.analytics'
 
 
 
@@ -96,8 +100,7 @@ allprojects {
       import androidx.appcompat.app.AppCompatDelegate;  -->
      
 
-      import com.huawei.cloud.base.auth.DriveCredential;
-      import com.huawei.cloud.services.drive.DriveScopes;
+      
       import com.huawei.hmf.tasks.Task;
       import com.huawei.hms.common.ApiException;
       import com.huawei.hms.support.api.entity.auth.Scope;
@@ -208,6 +211,8 @@ allprojects {
     
   -->
   private void huaweiLogin() {
+
+        System.out.println("Huawei login called");
         <!-- AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); -->
         List&lt;Scope&gt; scopeList = new ArrayList&lt;&gt;();
         scopeList.add(HuaweiIdAuthAPIManager.HUAWEIID_BASE_SCOPE);
@@ -227,7 +232,7 @@ allprojects {
 
     <gameActivityOnActivityResultAdditions>  
     <insert>
-     <!-- Log.i(HmsTAG, "onActivityResult, requestCode = " + requestCode + ", resultCode = " + resultCode); -->
+          System.out.println("onActivityResult, requestCode = " + requestCode + ", resultCode = " + resultCode);
           if (requestCode == REQUEST_SIGN_IN_LOGIN) {
             Task&lt;AuthHuaweiId&gt; authHuaweiIdTask = HuaweiIdAuthManager.parseAuthResultFromIntent(data);
             if (authHuaweiIdTask.isSuccessful()) {
@@ -235,10 +240,10 @@ allprojects {
                 accessToken = huaweiAccount.getAccessToken();
                 unionId = huaweiAccount.getUnionId();
                 //int returnCode = init(unionId, accessToken, refreshAT);
-
+                System.out.println(accessToken);
             } else {
                 <!-- Log.d(HmsTAG, &quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode()); -->
-              //  Toast.makeText(getApplicationContext(), &quot;onActivityResult, signIn failed.&quot;, Toast.LENGTH_LONG).show();
+              System.out.println(&quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode());
             }
         }
     </insert>
