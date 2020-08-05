@@ -1,16 +1,27 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+/**
+* !Created By Taha HICHRI
+* @project    HMS Toolkit for UNREAL engine.
+* @author     Taha HICHRI <hishri.taha@gmail.com>
+* @see        https://github.com/tahaHichri
+* Copyright (c) 2020 hishri.com
+*/
+
 
 #include "HmsToolkitBPLibrary.h"
 #include "HmsToolkit.h"
 
+
+static UHiAnalytics* HiAnalyticsIns;
+
+
 UHmsToolkitBPLibrary::UHmsToolkitBPLibrary(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
-
+	HiAnalyticsIns = NewObject<UHiAnalytics>();
 }
 
-float UHmsToolkitBPLibrary::HmsToolkitSampleFunction(float Param)
+UHiAnalytics* UHmsToolkitBPLibrary::GetHiAnalytics()
 {
-	return -1;
+	return HiAnalyticsIns;
 }
 

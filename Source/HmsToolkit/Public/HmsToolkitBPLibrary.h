@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Blueprint/HiAnalytics.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "HmsToolkitBPLibrary.generated.h"
 
@@ -27,6 +28,11 @@ class UHmsToolkitBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "HmsToolkit sample test testing"), Category = "HmsToolkitTesting")
-	static float HmsToolkitSampleFunction(float Param);
+
+
+	UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Get HiAnalytics class"))
+	static UHiAnalytics* GetHiAnalytics();
+
+
+	
 };
