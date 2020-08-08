@@ -22,6 +22,5 @@ public:
 	static UHiAnalytics* GetInstance();
 
 
-
 	
 };

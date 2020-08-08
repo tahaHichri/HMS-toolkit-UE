@@ -25,3 +25,14 @@ UHiAnalytics* UHmsToolkitBPLibrary::GetHiAnalytics()
 	return HiAnalyticsIns;
 }
 
+
+
+bool UHmsToolkitBPLibrary::isHuaweiMobileServicesAvailable()
+{
+#if PLATFORM_ANDROID
+	return true;
+#endif
+	return false;
+}
+
+

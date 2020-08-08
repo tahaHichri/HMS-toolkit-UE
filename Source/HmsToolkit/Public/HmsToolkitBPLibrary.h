@@ -34,5 +34,8 @@ class UHmsToolkitBPLibrary : public UBlueprintFunctionLibrary
 	static UHiAnalytics* GetHiAnalytics();
 
 
+
+	UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Huawei Mobile Service on this device"))
+	static bool isHuaweiMobileServicesAvailable();
 	
 };
