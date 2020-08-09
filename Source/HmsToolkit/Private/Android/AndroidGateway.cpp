@@ -32,6 +32,15 @@ void FAndroidGateway::ReportAnalyticsEvent(FString eventId, FString jsonFormatte
 		jstring jStringEventIdParam = Env->NewStringUTF((std::string(TCHAR_TO_UTF8(*eventId))).c_str());
 		jstring jStringJsonFormattedParamsParam = Env->NewStringUTF((std::string(TCHAR_TO_UTF8(*jsonFormattedParams))).c_str());
 
+		if (!jStringEventIdParam || !jStringJsonFormattedParamsParam)
+		{
+			UE_LOG(LogTemp, Fatal, TEXT("Could Not generate jstring FOR reportHiAnalyticsEvent"));
+		}
+
 		FJavaWrapper::CallVoidMethod(Env, FJavaWrapper::GameActivityThis, FAndroidGateway::ReportAnalyticsEventMethod, jStringEventIdParam, jStringJsonFormattedParamsParam);
+	
+	
+		Env->DeleteLocalRef(jStringEventIdParam);
+		Env->DeleteLocalRef(jStringJsonFormattedParamsParam);
 	}
 }

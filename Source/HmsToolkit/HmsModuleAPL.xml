@@ -134,6 +134,8 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			* @param params
 			*/
 			public void reportHiAnalyticsEvent(String eventId, String params) {
+
+			System.out.println("reportHiAnalyticsEvent called with "+eventId+" :: params");
 			
 			try {
 			JSONObject paramsMapAsJSON = (new JSONObject(params));
@@ -145,6 +147,7 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			bundle.putString(jsonPropertyKey, paramsMapAsJSON.getString(jsonPropertyKey));
 			}
 			
+			setHiAnalyticsUserProfile("test Mar", "RAMM2");
 			instance.onEvent(eventId, bundle);
 			
 			} catch (Exception e) {
@@ -152,6 +155,31 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			}
 			
 			}
+			
+			
+			/**
+			* Huawei AnalyticsKit user profile
+			* @param name
+			* @param value
+			*/
+			public void setHiAnalyticsUserProfile(String name, String value) {
+			
+			instance.setUserProfile(name, value);
+			
+			}
+			
+			/**
+			* Huawei AnalyticsKit userID
+			* @param id
+			*/
+			public void setHiAnalyticsUserId(String userId) {
+			
+			instance.setUserId(userId);
+			
+			}
+
+
+			//public void setAnalyticsEnabled(bool enabled)
 		</insert>
 	</gameActivityClassAdditions>
 	<gameActivityOnActivityResultAdditions>

@@ -60,7 +60,7 @@ void UHiAnalytics::reportEvent(FString eventId, TMap<FString, FString> params)
 
 	UE_LOG(LogTemp, Warning, TEXT("resulting jsonString -> %s"), *OutputString);
 
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->ReportAnalyticsEvent(eventId, OutputString);
 #endif
 }
 
