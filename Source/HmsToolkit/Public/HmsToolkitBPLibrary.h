@@ -28,14 +28,9 @@ class UHmsToolkitBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-
-
 	UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Get HiAnalytics class"))
-	static UHiAnalytics* GetHiAnalytics();
-
-
+	static UHiAnalytics *GetHiAnalytics();
 
 	UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Huawei Mobile Service on this device"))
 	static bool isHuaweiMobileServicesAvailable();
-	
 };

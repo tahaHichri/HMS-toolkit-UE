@@ -1,31 +1,25 @@
 /**
 * !Created By Taha HICHRI
-* @project    HMS Toolkit for UNREAL engine.
 * @author     Taha HICHRI <hishri.taha@gmail.com>
 * @see        https://github.com/tahaHichri
 * Copyright (c) 2020 hishri.com
 */
 
-
 #include "HmsToolkitBPLibrary.h"
 #include "HmsToolkit.h"
 
+static UHiAnalytics *HiAnalyticsIns;
 
-static UHiAnalytics* HiAnalyticsIns;
-
-
-UHmsToolkitBPLibrary::UHmsToolkitBPLibrary(const FObjectInitializer& ObjectInitializer)
-: Super(ObjectInitializer)
+UHmsToolkitBPLibrary::UHmsToolkitBPLibrary(const FObjectInitializer &ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	HiAnalyticsIns = NewObject<UHiAnalytics>();
 }
 
-UHiAnalytics* UHmsToolkitBPLibrary::GetHiAnalytics()
+UHiAnalytics *UHmsToolkitBPLibrary::GetHiAnalytics()
 {
 	return HiAnalyticsIns;
 }
-
-
 
 bool UHmsToolkitBPLibrary::isHuaweiMobileServicesAvailable()
 {
@@ -34,5 +28,3 @@ bool UHmsToolkitBPLibrary::isHuaweiMobileServicesAvailable()
 #endif
 	return false;
 }
-
-

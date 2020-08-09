@@ -1,255 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-    ! Created By Taha HICHRI
-    Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
+<!--
+! Created By Taha HICHRI
+Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 -->
 <root xmlns:android="http://schemas.android.com/apk/res/android">
-  <init>
-    <log text="HMS Toolkit inject"/>
-  </init>
-
-  <proguardAdditions>
-    <insert>
-     
-    </insert>
-  </proguardAdditions>
-
-
-   <baseBuildGradleAdditions>
-    <insert>
-
-allprojects {
-    repositories {
-      google()
-      jcenter()
-
-      maven {url 'http://developer.huawei.com/repo/'}
-    }
-}
-
-    </insert>
-   
-    </baseBuildGradleAdditions>
-
-  <buildscriptGradleAdditions>
- <insert>
-
-    repositories {
-      // Huawei repository
-      maven { url 'https://developer.huawei.com/repo/' }
-    }
-
-
-    dependencies {
-      // Huawei AG connect
-      classpath 'com.huawei.agconnect:agcp:1.2.1.301'
-
-      // analytics
-      classpath 'com.huawei.hms.plugin:analytics:5.0.1.300'
-    }
-    </insert>
-
-  </buildscriptGradleAdditions>
-
-
-<prebuildCopies>
-<copyFile src="$S(PluginDir)/agconnect-services.json" dst="$S(BuildDir)/gradle/app/agconnect-services.json"/>
-</prebuildCopies>
-
-  <buildGradleAdditions>
-
- <insert>
-
-
-    dependencies {
-    /**
-    * HMS dependencies
-    */
-
-    implementation 'com.huawei.hms:hwid:4.0.0.300'          // Core
-    implementation 'com.huawei.hms:hianalytics:5.0.1.301'   // analytics
-    }
-
-    apply plugin: 'com.huawei.agconnect'
-    apply plugin: 'com.huawei.hms.plugin.analytics'
-
-
-
-        </insert>
-
-  </buildGradleAdditions>
-
-  <prebuildCopies>
-   
-  </prebuildCopies>
-
-  <gameActivityImportAdditions>
-    <insert>
-     <!--Inject imports here-->
-      
-      import java.util.Collections;
-      import java.util.ArrayList;
-      import java.util.List;
-
-      import android.content.Intent;
-      import android.os.Bundle;
-      import android.util.Log;
-
-      
-      <!-- import androidx.appcompat.app.AppCompatActivity;
-      import androidx.appcompat.app.AppCompatDelegate;  -->
-     
-
-      
-      import com.huawei.hmf.tasks.Task;
-      import com.huawei.hms.common.ApiException;
-      import com.huawei.hms.support.api.entity.auth.Scope;
-      import com.huawei.hms.support.hwid.HuaweiIdAuthAPIManager;
-      import com.huawei.hms.support.hwid.HuaweiIdAuthManager;
-      import com.huawei.hms.support.hwid.request.HuaweiIdAuthParams;
-      import com.huawei.hms.support.hwid.request.HuaweiIdAuthParamsHelper;
-      import com.huawei.hms.support.hwid.result.AuthHuaweiId;
-      import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
-      import static com.huawei.hms.support.hwid.request.HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM;
-
-    </insert>
-  </gameActivityImportAdditions>
-
-  <androidManifestUpdates>
-    
-
-  
-  </androidManifestUpdates>
-  
-  <!--
-  ####################### Activity/App lifecycle callbacks ######################
-  -->
-  <!--
-  # optional additions to GameActivity onCreate in GameActivity.java 
-  # There are a few checks and final value initializations, preferably I will add them here
-  -->
+	<init>
+		<log text="HMS Toolkit inject" />
+	</init>
+	<proguardAdditions>
+		<insert>
+		</insert>
+	</proguardAdditions>
+	<baseBuildGradleAdditions>
+		<insert>
+			allprojects {
+			repositories {
+			google()
+			jcenter()
+			
+			maven {url 'http://developer.huawei.com/repo/'}
+			}
+			}
+		</insert>
+	</baseBuildGradleAdditions>
+	<buildscriptGradleAdditions>
+		<insert>
+			repositories {
+			// Huawei repository
+			maven { url 'https://developer.huawei.com/repo/' }
+			}
+			
+			
+			dependencies {
+			// Huawei AG connect
+			classpath 'com.huawei.agconnect:agcp:1.2.1.301'
+			
+			// analytics
+			classpath 'com.huawei.hms.plugin:analytics:5.0.1.300'
+			}
+		</insert>
+	</buildscriptGradleAdditions>
+	<prebuildCopies>
+		<copyFile src="$S(PluginDir)/agconnect-services.json" dst="$S(BuildDir)/gradle/app/agconnect-services.json" />
+	</prebuildCopies>
+	<buildGradleAdditions>
+		<insert>
+			dependencies {
+			/**
+			* HMS dependencies
+			*/
+			
+			implementation 'com.huawei.hms:hwid:4.0.0.300'          // Core
+			implementation 'com.huawei.hms:hianalytics:5.0.1.301'   // analytics
+			}
+			
+			apply plugin: 'com.huawei.agconnect'
+			apply plugin: 'com.huawei.hms.plugin.analytics'
+		</insert>
+	</buildGradleAdditions>
+	<prebuildCopies>
+	</prebuildCopies>
+	<gameActivityImportAdditions>
+		<insert>
+			<!-- Inject imports here -->
+			import java.util.Collections;
+			import java.util.ArrayList;
+			import java.util.List;
+			
+			import android.content.Intent;
+			import android.os.Bundle;
+			import android.util.Log;
+			
+			import com.huawei.hmf.tasks.Task;
+			import com.huawei.hms.common.ApiException;
+			import com.huawei.hms.support.api.entity.auth.Scope;
+			
+			
+			import com.huawei.hms.analytics.HiAnalytics;
+			import com.huawei.hms.analytics.HiAnalyticsInstance;
+			import com.huawei.hms.analytics.HiAnalyticsTools;
+			import static com.huawei.hms.analytics.type.HAEventType.*;
+			import static com.huawei.hms.analytics.type.HAParamType.*;
+		</insert>
+	</gameActivityImportAdditions>
+	<androidManifestUpdates>
+	</androidManifestUpdates>
+	<!-- ####################### Activity/App lifecycle callbacks ###################### -->
+	<!--
+	# optional additions to GameActivity onCreate in GameActivity.java
+	# There are a few checks and final value initializations, preferably I will add them here
+	-->
 	<gameActivityOnCreateAdditions>
-     <insert>
-       huaweiLogin();
-     </insert>
-  </gameActivityOnCreateAdditions>
-  
-  
- 
-   <!-- optional additions to GameActivity onDestroy in GameActivity.java -->
-	 <gameActivityOnDestroyAdditions>
-     <insert>
-      
-     </insert>
-   </gameActivityOnDestroyAdditions>
-	 	
-	 <!-- optional additions to GameActivity onStart in GameActivity.java -->
-	 <gameActivityOnStartAdditions></gameActivityOnStartAdditions>
-	 	
-	 <!-- optional additions to GameActivity onStop in GameActivity.java -->
-	 <gameActivityOnStopAdditions>
-        <insert>
-  
-        </insert>
-   </gameActivityOnStopAdditions>
-	 	
-	 <!-- optional additions to GameActivity onPause in GameActivity.java -->
-	 <gameActivityOnPauseAdditions>
-     <insert>
-  
-  
-   </insert>
-     
-   </gameActivityOnPauseAdditions>
-	  	
-	 <!-- optional additions to GameActivity onResume in GameActivity.java -->
-	 <gameActivityOnResumeAdditions></gameActivityOnResumeAdditions>
-
-  
-    <!--
-    # Methods, inner classes, and other the other additions
-    --> 
-  <gameActivityClassAdditions>
-    <insert>
-
-    private static int REQUEST_SIGN_IN_LOGIN = 1302;
-      
-    private final static String HmsTAG = &quot;HMS:: &quot;;
-
-    private String accessToken;
-    private String unionId;  
-
-         <!--
-
-       
-     
-    /**
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.i(HmsTAG, "onActivityResult, requestCode = " + requestCode + ", resultCode = " + resultCode);
-          if (requestCode == REQUEST_SIGN_IN_LOGIN) {
-            Task&lt;AuthHuaweiId&gt; authHuaweiIdTask = HuaweiIdAuthManager.parseAuthResultFromIntent(data);
-            if (authHuaweiIdTask.isSuccessful()) {
-                AuthHuaweiId huaweiAccount = authHuaweiIdTask.getResult();
-                accessToken = huaweiAccount.getAccessToken();
-                unionId = huaweiAccount.getUnionId();
-                //int returnCode = init(unionId, accessToken, refreshAT);
-
-            } else {
-                Log.d(HmsTAG, &quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode());
-              //  Toast.makeText(getApplicationContext(), &quot;onActivityResult, signIn failed.&quot;, Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-    
-    
-  -->
-  private void huaweiLogin() {
-
-        System.out.println("Huawei login called");
-        <!-- AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); -->
-        List&lt;Scope&gt; scopeList = new ArrayList&lt;&gt;();
-        scopeList.add(HuaweiIdAuthAPIManager.HUAWEIID_BASE_SCOPE);
-
-        HuaweiIdAuthParams authParams = new HuaweiIdAuthParamsHelper(DEFAULT_AUTH_REQUEST_PARAM)
-                .setAccessToken()
-                .setIdToken()
-                .setScopeList(scopeList)
-                .createParams();
-        HuaweiIdAuthService client = HuaweiIdAuthManager.getService(this, authParams);
-        startActivityForResult(client.getSignInIntent(), REQUEST_SIGN_IN_LOGIN);
-    } 
-
-    </insert>
-  </gameActivityClassAdditions>
-
-
-    <gameActivityOnActivityResultAdditions>  
-    <insert>
-          System.out.println("onActivityResult, requestCode = " + requestCode + ", resultCode = " + resultCode);
-          if (requestCode == REQUEST_SIGN_IN_LOGIN) {
-            Task&lt;AuthHuaweiId&gt; authHuaweiIdTask = HuaweiIdAuthManager.parseAuthResultFromIntent(data);
-            if (authHuaweiIdTask.isSuccessful()) {
-                AuthHuaweiId huaweiAccount = authHuaweiIdTask.getResult();
-                accessToken = huaweiAccount.getAccessToken();
-                unionId = huaweiAccount.getUnionId();
-                //int returnCode = init(unionId, accessToken, refreshAT);
-                System.out.println(accessToken);
-            } else {
-                <!-- Log.d(HmsTAG, &quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode()); -->
-              System.out.println(&quot;onActivityResult, signIn failed: &quot; + ((ApiException) authHuaweiIdTask.getException()).getStatusCode());
-            }
-        }
-    </insert>
-      </gameActivityOnActivityResultAdditions>
-
-
-
-
+		<insert>
+			HiAnalyticsTools.enableLog();
+			// Generate the Analytics Instance
+			instance = HiAnalytics.getInstance(this);
+			
+			instance.setUserProfile("User referral", "Taa");
+			
+			Bundle bundle = new Bundle();
+			bundle.putLong(SCORE, 666);
+			
+			// Report a predefined Event
+			instance.onEvent(SUBMITSCORE, bundle);
+		</insert>
+	</gameActivityOnCreateAdditions>
+	<!-- optional additions to GameActivity onDestroy in GameActivity.java -->
+	<gameActivityOnDestroyAdditions>
+		<insert>
+		</insert>
+	</gameActivityOnDestroyAdditions>
+	<!-- optional additions to GameActivity onStart in GameActivity.java -->
+	<gameActivityOnStartAdditions>
+	</gameActivityOnStartAdditions>
+	<!-- optional additions to GameActivity onStop in GameActivity.java -->
+	<gameActivityOnStopAdditions>
+		<insert>
+		</insert>
+	</gameActivityOnStopAdditions>
+	<!-- optional additions to GameActivity onPause in GameActivity.java -->
+	<gameActivityOnPauseAdditions>
+		<insert>
+		</insert>
+	</gameActivityOnPauseAdditions>
+	<!-- optional additions to GameActivity onResume in GameActivity.java -->
+	<gameActivityOnResumeAdditions>
+	</gameActivityOnResumeAdditions>
+	<!-- # Methods, inner classes, and other the other additions -->
+	<gameActivityClassAdditions>
+		<insert>
+			// analytics
+			HiAnalyticsInstance instance;
+		</insert>
+	</gameActivityClassAdditions>
+	<gameActivityOnActivityResultAdditions>
+		<insert>
+		</insert>
+	</gameActivityOnActivityResultAdditions>
 </root>
