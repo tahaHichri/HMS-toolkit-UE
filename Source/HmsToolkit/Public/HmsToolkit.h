@@ -10,8 +10,11 @@
 #pragma once
 
 #include "Modules/ModuleManager.h"
+#include "TaDispatcher.h"
 
-class FHmsToolkitModule : public IModuleInterface
+#define LOCTEXT_NAMESPACE "HmsToolkit"
+
+class FHmsToolkitModule : public TaDispatcher
 {
 public:
 

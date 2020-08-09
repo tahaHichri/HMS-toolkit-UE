@@ -66,7 +66,7 @@ public class HmsToolkit : ModuleRules
         // ignore platforms, except for Android.
         if (Target.Platform == UnrealTargetPlatform.Android)
         {
-            //PrivateIncludePaths.Add("BluetoothSupport/Private/Android");
+            PrivateIncludePaths.Add("HmsToolkit/Private/Android");
 
             PrivateDependencyModuleNames.AddRange(new string[] { "Launch" });
 
