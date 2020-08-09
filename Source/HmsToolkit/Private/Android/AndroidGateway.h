@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "Interfaces/BluetoothOperationsInterface.h"
+#include "Interfaces/HmsKitsOperationsInterface.h"
 #include "Android/AndroidJNI.h"
 #include "Android/AndroidApplication.h"
 #include <android_native_app_glue.h>
@@ -16,16 +16,16 @@
 #include "Core.h"
 #include <string>
 
-#include "Async.h"
 
-class FAndroidGateway : public IBluetoothOperationsInterface
+
+class FAndroidGateway : public IHmsKitsOperationsInterface
 {
   public:
 	FAndroidGateway();
 	virtual ~FAndroidGateway();
 
-	// virtual bool IsEnabled() override;
+	virtual void ReportAnalyticsEvent(FString eventId, FString jsonFormattedParams) override;
 
-	// // JNI Methods
-	// static jmethodID IsEnabledMethod;
+	// JNI Methods
+	static jmethodID ReportAnalyticsEventMethod;
 };

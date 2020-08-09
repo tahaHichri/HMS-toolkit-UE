@@ -19,8 +19,7 @@
 class IHmsKitsOperationsInterface
 { 
 public:
-	// virtual bool IsEnabled() = 0;
-	// virtual bool EnableBluetoothAdapter() = 0;
-	// virtual bool DisableBluetoothAdapter() = 0;
+	virtual void ReportAnalyticsEvent(FString eventId, FString jsonFormattedParams) = 0;
+
 };
 

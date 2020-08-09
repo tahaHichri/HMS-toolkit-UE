@@ -81,6 +81,9 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			import com.huawei.hms.analytics.HiAnalyticsTools;
 			import static com.huawei.hms.analytics.type.HAEventType.*;
 			import static com.huawei.hms.analytics.type.HAParamType.*;
+			
+			import org.json.JSONObject;
+			import android.os.Bundle;
 		</insert>
 	</gameActivityImportAdditions>
 	<androidManifestUpdates>
@@ -95,14 +98,6 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			HiAnalyticsTools.enableLog();
 			// Generate the Analytics Instance
 			instance = HiAnalytics.getInstance(this);
-			
-			instance.setUserProfile("User referral", "Taa");
-			
-			Bundle bundle = new Bundle();
-			bundle.putLong(SCORE, 666);
-			
-			// Report a predefined Event
-			instance.onEvent(SUBMITSCORE, bundle);
 		</insert>
 	</gameActivityOnCreateAdditions>
 	<!-- optional additions to GameActivity onDestroy in GameActivity.java -->
@@ -131,6 +126,32 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 		<insert>
 			// analytics
 			HiAnalyticsInstance instance;
+			
+			
+			/**
+			* Huawei AnalyticsKit event
+			* @param eventId
+			* @param params
+			*/
+			public void reportHiAnalyticsEvent(String eventId, String params) {
+			
+			try {
+			JSONObject paramsMapAsJSON = (new JSONObject(params));
+			
+			Bundle bundle = new Bundle();
+			
+			while (paramsMapAsJSON.keys().hasNext()) {
+			String jsonPropertyKey = paramsMapAsJSON.keys().next();
+			bundle.putString(jsonPropertyKey, paramsMapAsJSON.getString(jsonPropertyKey));
+			}
+			
+			instance.onEvent(eventId, bundle);
+			
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+			
+			}
 		</insert>
 	</gameActivityClassAdditions>
 	<gameActivityOnActivityResultAdditions>
