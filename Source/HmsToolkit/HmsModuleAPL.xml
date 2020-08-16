@@ -83,6 +83,9 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			import static com.huawei.hms.analytics.type.HAParamType.*;
 			
 			import org.json.JSONObject;
+			import org.json.JSONException;
+			import java.util.Iterator;
+			
 			import android.os.Bundle;
 		</insert>
 	</gameActivityImportAdditions>
@@ -134,21 +137,16 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			* @param params
 			*/
 			public void reportHiAnalyticsEvent(String eventId, String params) {
-
-			System.out.println("reportHiAnalyticsEvent called with "+eventId+" :: params");
+			
+			System.out.println("reportHiAnalyticsEvent called with ::  "+params);
 			
 			try {
 			JSONObject paramsMapAsJSON = (new JSONObject(params));
 			
-			Bundle bundle = new Bundle();
+			Bundle bundle = hms_convertJsonToBundle(paramsMapAsJSON);
 			
-			while (paramsMapAsJSON.keys().hasNext()) {
-			String jsonPropertyKey = paramsMapAsJSON.keys().next();
-			bundle.putString(jsonPropertyKey, paramsMapAsJSON.getString(jsonPropertyKey));
-			}
-			
-			setHiAnalyticsUserProfile("test Mar", "RAMM2");
-			instance.onEvent(eventId, bundle);
+			System.out.println("Bundle from JSON: "+ bundle.toString());
+			instance.onEvent(COMPLETEORDER, bundle);
 			
 			} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +161,7 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			* @param value
 			*/
 			public void setHiAnalyticsUserProfile(String name, String value) {
-			
+			System.out.println("setHiAnalyticsUserProfile");
 			instance.setUserProfile(name, value);
 			
 			}
@@ -177,9 +175,56 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			instance.setUserId(userId);
 			
 			}
-
-
-			//public void setAnalyticsEnabled(bool enabled)
+			
+			
+			public void clearCachedData(){
+			System.out.println("Hello from JNI");
+			}
+			
+			
+			
+			
+			/**
+			* Util methods
+			*/
+			public static Bundle hms_convertJsonToBundle(JSONObject json){
+			Bundle bundle = new Bundle();
+			try{
+			Iterator&lt;String&gt; iterator = json.keys();
+			while(iterator.hasNext()){
+			String key = (String)iterator.next();
+			Object value = json.get(key);
+			switch(value.getClass().getSimpleName()){
+			case "String":
+			bundle.putString(key, (String) value);
+			break;
+			case "Integer":
+			bundle.putInt(key, (Integer) value);
+			break;
+			case "Long":
+			bundle.putLong(key, (Long) value);
+			break;
+			case "Boolean":
+			bundle.putBoolean(key, (Boolean) value);
+			break;
+			case "JSONObject":
+			bundle.putBundle(key, hms_convertJsonToBundle((JSONObject)value));
+			break;
+			case "Float":
+			bundle.putFloat(key, (Float) value);
+			break;
+			case "Double":
+			bundle.putDouble(key, (Double) value);
+			break;
+			default:
+			bundle.putString(key, value.getClass().getSimpleName());
+			}
+			}
+			}catch(JSONException e){
+			e.printStackTrace();
+			}
+			return bundle;
+			}
 		</insert>
 	</gameActivityClassAdditions>
 	<gameActivityOnActivityResultAdditions>

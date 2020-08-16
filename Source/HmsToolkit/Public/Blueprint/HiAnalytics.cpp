@@ -19,9 +19,8 @@ void UHiAnalytics::setUserProfile(FString name, FString value)
 {
 	//
 #if PLATFORM_ANDROID
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->SetHiAnalyticsUserProfile(name, value);
 #endif
-	//return false;
 }
 
 void UHiAnalytics::setUserId(FString userId)
@@ -67,7 +66,7 @@ void UHiAnalytics::reportEvent(FString eventId, TMap<FString, FString> params)
 void UHiAnalytics::clearCachedData()
 {
 #if PLATFORM_ANDROID
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->ClearCachedData();
 #endif
 }
 

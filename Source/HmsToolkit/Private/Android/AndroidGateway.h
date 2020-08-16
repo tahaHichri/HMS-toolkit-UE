@@ -16,8 +16,6 @@
 #include "Core.h"
 #include <string>
 
-
-
 class FAndroidGateway : public IHmsKitsOperationsInterface
 {
   public:
@@ -25,7 +23,11 @@ class FAndroidGateway : public IHmsKitsOperationsInterface
 	virtual ~FAndroidGateway();
 
 	virtual void ReportAnalyticsEvent(FString eventId, FString jsonFormattedParams) override;
+	virtual void SetHiAnalyticsUserProfile(FString name, FString value) override;
+	virtual void ClearCachedData() override;
 
 	// JNI Methods
 	static jmethodID ReportAnalyticsEventMethod;
+	static jmethodID SetHiAnalyticsUserProfileMethod;
+	static jmethodID ClearCachedDataMethod;
 };
