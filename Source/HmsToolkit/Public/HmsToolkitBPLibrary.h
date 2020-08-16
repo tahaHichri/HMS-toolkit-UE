@@ -33,4 +33,8 @@ class UHmsToolkitBPLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Huawei Mobile Service on this device"))
 	static bool isHuaweiMobileServicesAvailable();
+
+	//UFUNCTION(BlueprintCallable, Category = "HmsToolkit", meta = (ToolTip = "Google Mobile Service on this device"))
+	//static bool isGooglePlayServicesAvailable();
+
 };

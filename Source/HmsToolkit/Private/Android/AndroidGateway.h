@@ -26,8 +26,18 @@ class FAndroidGateway : public IHmsKitsOperationsInterface
 	virtual void SetHiAnalyticsUserProfile(FString name, FString value) override;
 	virtual void ClearCachedData() override;
 
+	virtual void SetHiAnalyticsEnabled(bool enabled) override;
+	virtual void SetHiUserId(FString userId) override;
+	virtual void SetHiSessionDuration(int32 milliseconds) override;
+	virtual bool IsHuaweiMobileServicesAvailable() override;
+
 	// JNI Methods
 	static jmethodID ReportAnalyticsEventMethod;
 	static jmethodID SetHiAnalyticsUserProfileMethod;
 	static jmethodID ClearCachedDataMethod;
+
+	static jmethodID SetHiAnalyticsEnabledMethod;
+	static jmethodID SetHiUserIdMethod;
+	static jmethodID SetHiSessionDurationMethod;
+	static jmethodID IsHuaweiMobileServicesAvailableMethod;
 };

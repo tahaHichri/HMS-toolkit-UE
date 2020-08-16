@@ -18,5 +18,13 @@ class IHmsKitsOperationsInterface
 
 	virtual void SetHiAnalyticsUserProfile(FString name, FString value) = 0;
 
+	virtual void SetHiAnalyticsEnabled(bool enabled) = 0;
+
+	virtual void SetHiUserId(FString userId) = 0;
+
+	virtual void SetHiSessionDuration(int32 milliseconds) = 0;
+
 	virtual void ClearCachedData() = 0;
+
+	virtual bool IsHuaweiMobileServicesAvailable() = 0;
 };

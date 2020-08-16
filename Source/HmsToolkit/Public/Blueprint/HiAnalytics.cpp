@@ -27,7 +27,7 @@ void UHiAnalytics::setUserId(FString userId)
 {
 	//
 #if PLATFORM_ANDROID
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->SetHiUserId(userId);
 #endif
 	//return false;
 }
@@ -36,7 +36,7 @@ void UHiAnalytics::setAnalyticsEnabled(bool enabled)
 {
 	//
 #if PLATFORM_ANDROID
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->SetHiAnalyticsEnabled(enabled);
 #endif
 	//return false;
 }
@@ -73,6 +73,6 @@ void UHiAnalytics::clearCachedData()
 void UHiAnalytics::setSessionDuration(int32 milliseconds)
 {
 #if PLATFORM_ANDROID
-	//return TaDispatcher::Get().GetAndroidGatewayInterface()->ScanByCharacteristic(scanTimeout, serviceUUID, deviceAddress);
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->SetHiSessionDuration(milliseconds);
 #endif
 }

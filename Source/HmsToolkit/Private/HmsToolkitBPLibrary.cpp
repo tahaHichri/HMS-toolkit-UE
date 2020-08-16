@@ -24,7 +24,15 @@ UHiAnalytics *UHmsToolkitBPLibrary::GetHiAnalytics()
 bool UHmsToolkitBPLibrary::isHuaweiMobileServicesAvailable()
 {
 #if PLATFORM_ANDROID
-	return true;
+	return TaDispatcher::Get().GetAndroidGatewayInterface()->IsHuaweiMobileServicesAvailable();
 #endif
 	return false;
 }
+
+// bool UHmsToolkitBPLibrary::isGooglePlayServicesAvailable()
+// {
+// #if PLATFORM_ANDROID
+// 	return true;
+// #endif
+// 	return false;
+// }
