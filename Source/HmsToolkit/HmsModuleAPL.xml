@@ -131,6 +131,16 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			HiAnalyticsInstance instance;
 			
 			
+			public void setHiAnalyticsEnabled(boolean enabled){
+			instance.setAnalyticsEnabled(enabled)
+			}
+			
+			
+			public void setHiSessionDuration(int milliseconds){
+			instance.setSessionDuration(milliseconds)
+			}
+			
+			
 			/**
 			* Huawei AnalyticsKit event
 			* @param eventId
@@ -163,7 +173,6 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			public void setHiAnalyticsUserProfile(String name, String value) {
 			System.out.println("setHiAnalyticsUserProfile");
 			instance.setUserProfile(name, value);
-			
 			}
 			
 			/**
@@ -177,8 +186,8 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			}
 			
 			
-			public void clearCachedData(){
-			System.out.println("Hello from JNI");
+			public void clearHiCachedData(){
+			instance.clearCachedData()
 			}
 			
 			

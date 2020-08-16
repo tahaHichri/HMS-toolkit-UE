@@ -21,7 +21,7 @@ FAndroidGateway::FAndroidGateway()
 	{
 		ReportAnalyticsEventMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "reportHiAnalyticsEvent", "(Ljava/lang/String;Ljava/lang/String;)V", false);
 		SetHiAnalyticsUserProfileMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "setHiAnalyticsUserProfile", "(Ljava/lang/String;Ljava/lang/String;)V", false);
-		ClearCachedDataMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "clearCachedData", "()V", false);
+		ClearCachedDataMethod = FJavaWrapper::FindMethod(Env, FJavaWrapper::GameActivityClassID, "clearHiCachedData", "()V", false);
 	}
 }
 
