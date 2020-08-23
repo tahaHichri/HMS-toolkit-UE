@@ -194,7 +194,7 @@ Copyright (c) Taha HICHRI <hishri.taha@gmail.com> - 2020
 			instance.clearCachedData();
 			}
 			
-			public Boolean hmstlkt_isHuaweiMobileServicesAvailable()
+			public boolean hmstlkt_isHuaweiMobileServicesAvailable()
 			{
 			int result = HuaweiApiAvailability.getInstance().isHuaweiMobileServicesAvailable(this);
 			return result == com.huawei.hms.api.ConnectionResult.SUCCESS || result == com.huawei.hms.api.ConnectionResult.SERVICE_UPDATING;
